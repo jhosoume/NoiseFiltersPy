@@ -1,8 +1,8 @@
 from sklearn import datasets
-from noisefilter.HARF import HARF
+from noisefilter.CNN import CNN
 
 dataset = datasets.load_iris()
 data = dataset.data
 classes = dataset.target
-harf = HARF()
-filter = harf(data, classes)
+cnn = CNN()
+filter = cnn(data, classes)
