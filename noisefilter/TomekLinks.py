@@ -29,7 +29,6 @@ class TomekLinks:
         toRemove = np.concatenate((c1remove, c2remove))
 
         self.filter.remIndx = np.sort(toRemove)
-        self.filter.remIndx.sort()
         self.filter.set_cleanData(np.delete(data, self.filter.remIndx, axis = 0),
                                   np.delete(classes, self.filter.remIndx, axis = 0))
         return self.filter
