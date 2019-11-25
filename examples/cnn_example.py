@@ -1,5 +1,5 @@
 from sklearn import datasets
-from noisefilter.CNN import CNN
+from NoiseFiltersPy.CNN import CNN
 
 dataset = datasets.load_iris()
 data = dataset.data

@@ -1,5 +1,5 @@
 from sklearn import datasets
-from noisefilter.HARF import HARF
+from NoiseFiltersPy.HARF import HARF
 
 dataset = datasets.load_iris()
 data = dataset.data

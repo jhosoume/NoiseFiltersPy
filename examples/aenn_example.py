@@ -1,5 +1,5 @@
 from sklearn import datasets
-from noisefilter.AENN import AENN
+from NoiseFiltersPy.AENN import AENN
 
 dataset = datasets.load_iris()
 data = dataset.data

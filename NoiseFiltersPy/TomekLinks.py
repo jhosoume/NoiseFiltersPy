@@ -1,6 +1,6 @@
 import numpy as np
 
-from noisefilter.Filter import *
+from NoiseFiltersPy.Filter import *
 
 
 class TomekLinks:

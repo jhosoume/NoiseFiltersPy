@@ -1,5 +1,5 @@
 from sklearn import datasets
-from noisefilter.TomekLinks import TomekLinks
+from NoiseFiltersPy.TomekLinks import TomekLinks
 
 dataset = datasets.load_iris()
 data = dataset.data

@@ -1,5 +1,5 @@
 from sklearn import datasets
-from noisefilter.DROP import DROPv1
+from NoiseFiltersPy.DROP import DROPv1
 
 dataset = datasets.load_iris()
 data = dataset.data
