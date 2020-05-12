@@ -19,7 +19,7 @@ class HARF:
         self.ntrees = ntrees
         self.seed = seed
         self.k_fold = KFold(nfolds, shuffle = True, random_state = self.seed)
-        self.clf = RandomForestClassifier(n_estimators = ntrees, random_state = seed)
+        self.clf = RandomForestClassifier(n_estimators = ntrees, random_state = seed, n_jobs = -1)
         self.filter = Filter(parameters = {"nfolds": self.nfolds, "ntrees": self.ntrees, "agreementLevel": self.agreementLevel})
 
     def __call__(self, data, classes):

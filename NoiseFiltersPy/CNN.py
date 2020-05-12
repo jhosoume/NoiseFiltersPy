@@ -9,7 +9,7 @@ class CNN:
     def __init__(self, max_neighbours = 5):
         self.max_neighbours = max_neighbours
         self.filter = Filter(parameters = {})
-        self.clf = KNeighborsClassifier(n_neighbors = 1)
+        self.clf = KNeighborsClassifier(n_neighbors = 1, n_jobs = -1)
 
     def __call__(self, data, classes):
         self.isNoise = np.array([False] * len(classes))

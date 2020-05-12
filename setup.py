@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="NoiseFiltersPy",
-    version="0.0.2",
+    version="0.0.4",
     author="Juliana Hosoume and Luis Faina",
     author_email="ju.hosoume@gmail.com",
     description="Python implementation of NoiseFiltersR",
@@ -18,5 +18,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.5',
 )
