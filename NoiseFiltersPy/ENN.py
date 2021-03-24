@@ -1,15 +1,16 @@
 from sklearn.model_selection import KFold
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
+import typing as t
 
 from NoiseFiltersPy.Filter import *
 
 class ENN:
-    def __init__(self, neighbours = 3):
+    def __init__(self, neighbours: int = 3):
         self.neighbours = neighbours
         self.filter = Filter(parameters = {"neighbours": self.neighbours})
 
-    def __call__(self, data, classes):
+    def __call__(self, data: t.Sequence, classes: t.Sequence) -> Filter:
         self.isNoise = np.array([False] * len(classes))
         self.clf = KNeighborsClassifier(n_neighbors = self.neighbours, algorithm = 'kd_tree', n_jobs = -1)
         for indx in range(len(data)):

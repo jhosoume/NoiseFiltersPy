@@ -1,13 +1,13 @@
 import numpy as np
+import typing as t
 
 from NoiseFiltersPy.Filter import *
-
 
 class TomekLinks:
     def __init__(self):
         self.filter = Filter(parameters = {})
 
-    def __call__(self, data, classes):
+    def __call__(self, data: t.Sequence, classes: t.Sequence) -> Filter:
         levels = list(set(classes))
         classes = np.array(classes)
         class1Indxes = np.argwhere(classes == levels[0])

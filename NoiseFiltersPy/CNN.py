@@ -6,7 +6,7 @@ from NoiseFiltersPy.Filter import *
 
 
 class CNN:
-    def __init__(self, max_neighbours = 5):
+    def __init__(self, max_neighbours: int = 5):
         self.max_neighbours = max_neighbours
         self.filter = Filter(parameters = {})
         self.clf = KNeighborsClassifier(n_neighbors = 1, n_jobs = -1)

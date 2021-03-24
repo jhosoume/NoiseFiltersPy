@@ -1,13 +1,14 @@
 from sklearn.model_selection import KFold
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
+import typing as t
 
 from NoiseFiltersPy.Filter import *
 
 
 class HARF:
-    def __init__(self, nfolds = 10, agreementLevel = 0.7,
-                 ntrees = 500, seed = 0):
+    def __init__(self, nfolds: int = 10, agreementLevel: float = 0.7,
+                 ntrees: int = 500, seed: int = 0):
         # Some data verification
         # Data can be a DataFrame or a Numpy Array
         if (agreementLevel < 0.5 or agreementLevel > 1):
@@ -22,7 +23,7 @@ class HARF:
         self.clf = RandomForestClassifier(n_estimators = ntrees, random_state = seed, n_jobs = -1)
         self.filter = Filter(parameters = {"nfolds": self.nfolds, "ntrees": self.ntrees, "agreementLevel": self.agreementLevel})
 
-    def __call__(self, data, classes):
+    def __call__(self, data: t.Sequence, classes: t.Sequence) -> Filter:
         self.splits = self.k_fold.split(data)
         self.isNoise = np.array([False] * len(classes))
         for train_indx, test_indx in self.splits:

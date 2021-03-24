@@ -1,6 +1,7 @@
 from sklearn.model_selection import KFold
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
+import typing as t
 
 from NoiseFiltersPy.Filter import *
 

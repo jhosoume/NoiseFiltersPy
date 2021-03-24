@@ -6,3 +6,4 @@ data = dataset.data
 classes = dataset.target
 aenn = AENN()
 filter = aenn(data, classes)
+print(filter.cleanData)
