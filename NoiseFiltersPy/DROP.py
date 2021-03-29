@@ -7,11 +7,11 @@ from NoiseFiltersPy.Filter import *
 
 
 class DROPv1:
-    def __init__(self, num_neighbours = 1):
+    def __init__(self, num_neighbours: int = 1):
         self.n_neigh = num_neighbours
         self.filter = Filter(parameters = {num_neighbours: self.n_neigh})
 
-    def __call__(self, data, classes):
+    def __call__(self, data: t.Sequence, classes: t.Sequence) -> Filter:
         self.clf = KNeighborsClassifier()
         preds = []
         for indx in range(len(classes)):

@@ -3,7 +3,12 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-INSTALL_REQUIRES = []
+INSTALL_REQUIRES = [
+    'scikit-learn>=0.24',
+    'numpy',
+    'scipy',
+    'pandas'
+]
 
 EXTRAS_REQUIRE = {
     'code-check': [
@@ -40,11 +45,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=[
-        'scikit-learn>=0.24',
-        'numpy',
-        'scipy',
-        'pandas'
-    ],
+    install_requires=INSTALL_REQUIRES,
     python_requires='>=3.5',
 )

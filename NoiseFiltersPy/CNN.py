@@ -11,7 +11,7 @@ class CNN:
         self.filter = Filter(parameters = {})
         self.clf = KNeighborsClassifier(n_neighbors = 1, n_jobs = -1)
 
-    def __call__(self, data, classes):
+    def __call__(self, data: t.Sequence, classes: t.Sequence):
         self.isNoise = np.array([False] * len(classes))
 
         firstDifIndx = next(indx for indx, num in enumerate(classes) if num != classes[0])

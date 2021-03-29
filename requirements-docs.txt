@@ -1,5 +1,5 @@
 sphinx
-sphinx_rtd_theme
+divio-docs-theme
 pillow
 seaborn
 sphinx-gallery
