@@ -1,6 +1,9 @@
+import numpy as np
 import pandas as pd
+from abc import ABC
 
-class Injector:
+
+class Injector(ABC):
     """Base class for the injectors of artificial noise. 
 
     Attributes
@@ -28,10 +31,10 @@ class Injector:
         else:
             self.labels = labels
 
-        self.label_types = set(self.labels[0].unique())
         self.rate = rate
         self.verify()
         self.num_noise = int(self.rate * self.attrs.shape[0])
+        self.label_types = set(self.labels[0].unique())
     
     def verify(self) -> None:
         if min(self.labels.value_count()) < 2:
@@ -42,5 +45,15 @@ class Injector:
 
         if self.rate < 0 or self.rate > 1:
            raise ValueError("") 
+    
+    def _gen_random(self, seed: int = None):
+        """[summary]
+
+        Args:
+            seed (int, optional): [description]. Defaults to 123.
+        """
+        rng = np.random.default_rng(seed)
+        for example in self.new_noise:
+            self.labels.iloc[example] = rng.choice(list(self.label_types - set(self.labels.iloc[example])))
 
     
