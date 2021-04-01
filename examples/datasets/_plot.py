@@ -2,15 +2,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from NoiseFiltersPy.RandomInjector import RandomInjector
+from NoiseFiltersPy.NeighborwiseInjector import NeighborwiseInjector
 
 artificial_dataset = pd.read_csv("examples/datasets/ArtificialDataset.csv", header = None)
 artificial_dataset = artificial_dataset.rename(columns = {0: "At1", 1: "At2", 2: "Class"})
 
-ri = RandomInjector(artificial_dataset.iloc[:, :2].values, artificial_dataset.Class.values, rate = 0.3)
-ri.generate()
-artificial_dataset.Class = ri.labels
-artificial_dataset["color"] = [1 if indx in ri.noise_indx else 0 for indx in range(artificial_dataset.shape[0])]
+injector = NeighborwiseInjector(artificial_dataset.iloc[:, :2].values, artificial_dataset.Class.values, rate = 0.3)
+injector.generate()
+artificial_dataset.Class = injector.labels
+artificial_dataset["color"] = [1 if indx in injector.noise_indx else 0 for indx in range(artificial_dataset.shape[0])]
 
 sns.set_theme(context = "paper", 
     style = "white",
@@ -60,4 +60,4 @@ scatter.set(ylim = (0.95, 1.85))
 scatter.set(xlim = (2.9, 5.2))
 
 plt.tight_layout()
-plt.savefig("examples/random_artificial.png")
+plt.savefig("examples/neighborwise_artificial.png")

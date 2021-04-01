@@ -20,30 +20,38 @@ class Injector(ABC):
     """
 
     def __init__(self, attributes, labels, rate: float = 0.1) -> None:
-        self.new_noise = []
+        self._new_noise = []
         if not isinstance(attributes, pd.DataFrame):
-            self.attrs = pd.DataFrame(attributes)
+            self._attrs = pd.DataFrame(attributes)
         else:
-            self.attrs = attributes
+            self._attrs = attributes
 
         if not isinstance(attributes, pd.DataFrame):
-            self.labels = pd.DataFrame(labels)
+            self._labels = pd.DataFrame(labels)
         else:
-            self.labels = labels
+            self._labels = labels
 
-        self.rate = rate
+        self._rate = rate
         self.verify()
-        self.num_noise = int(self.rate * self.attrs.shape[0])
-        self.label_types = set(self.labels[0].unique())
+        self._num_noise = int(self._rate * self._attrs.shape[0])
+        self._label_types = set(self.labels[0].unique())
+    
+    @property
+    def labels(self):
+        return self._labels
+    
+    @property
+    def noise_indx(self):
+        return self._new_noise
     
     def verify(self) -> None:
-        if min(self.labels.value_count()) < 2:
+        if min(self._labels.value_counts()) < 2:
             raise ValueError("Number of examples in the minority class must be >= 2.")
         
-        if self.attrs.shape[0] != self.labels.shape[0]:
+        if self._attrs.shape[0] != self.labels.shape[0]:
             raise ValueError("Attributes and classes must have the sime size.")
 
-        if self.rate < 0 or self.rate > 1:
+        if self._rate < 0 or self._rate > 1:
            raise ValueError("") 
     
     def _gen_random(self, seed: int = None):
@@ -53,7 +61,7 @@ class Injector(ABC):
             seed (int, optional): [description]. Defaults to 123.
         """
         rng = np.random.default_rng(seed)
-        for example in self.new_noise:
-            self.labels.iloc[example] = rng.choice(list(self.label_types - set(self.labels.iloc[example])))
+        for example in self._new_noise:
+            self._labels.iloc[example] = rng.choice(list(self._label_types - set(self._labels.iloc[example])))
 
     
