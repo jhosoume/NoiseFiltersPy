@@ -19,7 +19,7 @@ class AENN:
                 self.clf.fit(np.delete(data, indx, axis = 0), np.delete(classes, indx, axis = 0))
                 pred = self.clf.predict(data[indx])
                 self.isNoise[indx] = pred != classes[indx]
-        self.filter.remIndx = np.argwhere(self.isNoise)
+        self.filter.rem_indx = np.argwhere(self.isNoise)
         notNoise = np.invert(self.isNoise)
         self.filter.set_cleanData(data[notNoise], classes[notNoise])
         return self.filter

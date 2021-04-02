@@ -35,6 +35,7 @@ class NonlinearwiseInjector(Injector):
         clf.fit(self._attrs, np.ravel(self._labels))
         distances = clf.decision_function(self._attrs)
         if distances.ndim > 1:
+            # When multiple attributes, get the minimum distance
             distances = pd.DataFrame(np.apply_along_axis(
                 min,
                 axis = 1,

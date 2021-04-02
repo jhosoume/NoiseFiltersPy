@@ -28,7 +28,7 @@ class Filter:
         self.rem_indx: t.List = []
         self.parameters = parameters
 
-    def set_cleanData(self, data: t.Sequence, classes: t.Sequence) -> t.NoReturn:
+    def set_cleanData(self, attributes: t.Sequence, labels: t.Sequence) -> t.NoReturn:
         """Helper function to set data and classes to Filter instance.
 
         Parameters
@@ -39,5 +39,5 @@ class Filter:
             Filtered target attributes(y) of the dataset.
 
         """
-        self.clean_data = data
-        self.clean_classes = classes
+        self.clean_data = attributes
+        self.clean_classes = labels

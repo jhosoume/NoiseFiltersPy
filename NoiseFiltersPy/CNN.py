@@ -34,8 +34,8 @@ class CNN:
                     inStore.append(indx)
                     grabBag.remove(indx)
                     keepOn = True
-        self.filter.remIndx = grabBag
-        self.filter.remIndx.sort()
+        self.filter.rem_indx = grabBag
+        self.filter.rem_indx.sort()
         notNoise = inStore
         notNoise.sort()
         self.filter.set_cleanData(data[notNoise], classes[notNoise])
