@@ -7,6 +7,7 @@ class NeighborwiseInjector(Injector):
     def generate(self, seed: int = None):
         self._new_noise = self._define_noise_examples()
         self._gen_random(seed = seed)
+        return self
 
     def _cal_dNN(self, distances, example_indx):
         equal_class = self._labels == self._labels.iloc[example_indx]

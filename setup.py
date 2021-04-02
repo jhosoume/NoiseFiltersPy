@@ -33,7 +33,7 @@ EXTRAS_REQUIRE = {
 setuptools.setup(
     name="NoiseFiltersPy",
     version="0.0.8",
-    author="Juliana Hosoume and Luis Faina",
+    author="Juliana Hosoume and Luis Paulo Faina Garcia",
     author_email="ju.hosoume@gmail.com",
     description="Python implementation of NoiseFiltersR",
     long_description=long_description,

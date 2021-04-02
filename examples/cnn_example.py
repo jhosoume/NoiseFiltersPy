@@ -1,6 +1,4 @@
 from sklearn import datasets
-
-import context
 from NoiseFiltersPy.CNN import CNN
 
 dataset = datasets.load_iris()

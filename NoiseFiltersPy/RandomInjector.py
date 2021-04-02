@@ -7,3 +7,4 @@ class RandomInjector(Injector):
         rng = np.random.default_rng(seed)
         self._new_noise = rng.choice(self._labels.shape[0], size = self._num_noise, replace = False)
         self._gen_random(seed = seed)
+        return self

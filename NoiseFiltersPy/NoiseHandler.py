@@ -26,20 +26,51 @@ class NoiseHandler:
         times = []
         for filter_type in methods:
             if filter_type in _implemented_filters:
-                filter = _implemented_filters()
-                filter, time = timeit(
-                    filter,
-                    data = self._attrs,
-                    classes = self._labels 
-                )
+                filter = _implemented_filters[filter_type]()
+                if self._measure_time:
+                    filter, time = timeit(
+                        filter,
+                        data = self._attrs,
+                        classes = self._labels 
+                    )
+                    times.append(time)
+                else:
+                    filter = filter(
+                        filter,
+                        data = self._attrs,
+                        classes = self._labels 
+                    )
                 self._attrs = filter.clean_data
                 self._classes = filter.clean_classes
                 filters.append(filter)
-                times.append(time)
-        return filters, times
+        if self._measure_time:
+            return filters, times
+        return filters
+
 
     def inject(self, methods):
-        pass
+        injectors = []
+        times = []
+        for injector_type in methods:
+            if injector_type in _implemented_injectors:
+                injector = _implemented_injectors[injector_type]()
+                if self._measure_time:
+                    filter, time = timeit(
+                        injector,
+                        data = self._attrs,
+                        classes = self._labels 
+                    )
+                    times.append(time)
+                else:
+                    filter = filter(
+                        filter,
+                        data = self._attrs,
+                        classes = self._labels 
+                    )
+                injectors.append(filter)
+        if self._measure_time:
+            return injectors, times
+        return injectors 
 
     def _output_converter(self):
         raise NotImplementedError

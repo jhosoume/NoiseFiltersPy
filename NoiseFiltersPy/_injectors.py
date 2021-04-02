@@ -1,7 +1,7 @@
 from NoiseFiltersPy import RandomInjector, NonlinearwiseInjector, NeighborwiseInjector
 
 _implemented_injectors = {
-    "RandomInjector": RandomInjector,
-    "NonlinearwiseInjector": NonlinearwiseInjector,
-    "NeighborwiseInjector": NeighborwiseInjector
+    "RandomInjector": RandomInjector.RandomInjector,
+    "NonlinearwiseInjector": NonlinearwiseInjector.NonlinearwiseInjector,
+    "NeighborwiseInjector": NeighborwiseInjector.NeighborwiseInjector
 }

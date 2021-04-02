@@ -8,6 +8,7 @@ class NonlinearwiseInjector(Injector):
     def generate(self, seed: int = None):
         self._new_noise = self._define_noise_examples(seed = seed)
         self._gen_random(seed = seed)
+        return self
 
     def _one_vs_one(self):
         labels_comb = itertools.combinations(self._label_types, 2)
