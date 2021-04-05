@@ -1,9 +1,10 @@
-from NoiseFiltersPy import AENN, CNN, DROP, ENN, TomekLinks
+from NoiseFiltersPy import AENN, HARF, CNN, DROP, ENN, TomekLinks
 
 _implemented_filters = {
-    "AENN": AENN.AENN,
+    "HARF": HARF.HARF,
     "CNN": CNN.CNN,
     "DROP": DROP.DROPv1,
     "ENN": ENN.ENN,
+    "AENN": AENN.AENN,
     "TomekLinks": TomekLinks.TomekLinks
 }

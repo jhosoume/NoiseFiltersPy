@@ -6,10 +6,11 @@ from NoiseFiltersPy.Filter import *
 
 
 class CNN:
-    def __init__(self, max_neighbours: int = 5):
+    def __init__(self, max_neighbours: int = 5, n_jobs: int = -1):
         self.max_neighbours = max_neighbours
         self.filter = Filter(parameters = {})
-        self.clf = KNeighborsClassifier(n_neighbors = 1, n_jobs = -1)
+        self.n_jobs = n_jobs
+        self.clf = KNeighborsClassifier(n_neighbors = 1, n_jobs = self.n_jobs)
 
     def __call__(self, data: t.Sequence, classes: t.Sequence):
         self.isNoise = np.array([False] * len(classes))

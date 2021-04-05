@@ -1,14 +1,18 @@
 from os import listdir
 from os.path import isfile, join
+from multiprocessing import Pool
+from functools import partial
 import numpy as np
 import pandas as pd
 from scipy.io import arff as arff_io
 from sklearn import preprocessing, metrics
 
+
 from NoiseFiltersPy._filters import _implemented_filters
 from NoiseFiltersPy._injectors import _implemented_injectors 
 
 DATASETS_PATH = "analysis/datasets/"
+FILTERS = ["DROP", "TomekLinks", "CNN", "ENN"]
 
 datasets = [f for f in listdir(DATASETS_PATH)
                 if ( isfile(join(DATASETS_PATH, f)) and
@@ -41,19 +45,18 @@ def calculate_filter_f1(dataset, filter, injector, rate = 0.1):
     filter = filter(attrs, np.ravel(injector.labels.values))
     real_values = [1 if indx in injector.noise_indx else 0 for indx in range(len(target))]
     pred_values = [1 if indx in filter.rem_indx else 0 for indx in range(len(target))]
-    return metrics.f1_score(real_values, pred_values, average = "micro")
+    return [dataset, metrics.f1_score(real_values, pred_values, average = "micro")]
 
 results = {}
-for filter in _implemented_filters.keys():
-    results[filter] = {}
+for filter in FILTERS:
+    results = {}
     for injector in _implemented_injectors.keys():
-        results[filter][injector] = {}
-        for dataset in datasets:
-            results[filter][injector][dataset] = calculate_filter_f1(
-                dataset,
-                _implemented_filters[filter], 
-                _implemented_injectors[injector]
-            )
+        calculate_f1 = partial(calculate_filter_f1,
+            filter = _implemented_filters[filter], 
+            injector = _implemented_injectors[injector]
+        )
+        # with Pool() as p:
+        results[injector] = dict(map(calculate_f1, datasets))
 
-results = pd.DataFrame(results)
-results.to_csv("compare_filters.csv")
+    results = pd.DataFrame(results)
+    results.to_csv("analysis/compare_filters/{}.csv".format(filter))
