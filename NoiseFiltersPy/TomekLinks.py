@@ -28,7 +28,7 @@ class TomekLinks:
         c2remove = class2Indxes[np.sum(tomekMatrix, axis = 0) > 0]
         toRemove = np.concatenate((c1remove, c2remove))
 
-        self.filter.remIndx = np.sort(toRemove)
-        self.filter.set_cleanData(np.delete(data, self.filter.remIndx, axis = 0),
-                                  np.delete(classes, self.filter.remIndx, axis = 0))
+        self.filter.rem_indx = np.sort(toRemove)
+        self.filter.set_cleanData(np.delete(data, self.filter.rem_indx, axis = 0),
+                                  np.delete(classes, self.filter.rem_indx, axis = 0))
         return self.filter
