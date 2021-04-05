@@ -12,7 +12,7 @@ from NoiseFiltersPy._filters import _implemented_filters
 from NoiseFiltersPy._injectors import _implemented_injectors 
 
 DATASETS_PATH = "analysis/datasets/"
-FILTERS = ["DROP", "TomekLinks", "CNN", "ENN"]
+FILTERS = ["TomekLinks", "CNN", "DROP", "ENN", "AENN"]
 
 datasets = [f for f in listdir(DATASETS_PATH)
                 if ( isfile(join(DATASETS_PATH, f)) and
