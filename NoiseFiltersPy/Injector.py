@@ -26,7 +26,7 @@ class Injector(ABC):
         else:
             self._attrs = attributes
 
-        if not isinstance(attributes, pd.DataFrame):
+        if not isinstance(labels, pd.DataFrame):
             self._labels = pd.DataFrame(labels)
         else:
             self._labels = labels

@@ -40,6 +40,7 @@ def calculate_filter_f1(dataset, filter, injector, rate = 0.1):
             remainder = "passthrough"
             )
         attrs = ct.fit_transform(attrs)
+    attrs = np.array(attrs)
 
     injector = injector(attrs, target, rate)
     injector.generate()
