@@ -12,7 +12,7 @@ from NoiseFiltersPy._filters import _implemented_filters
 from NoiseFiltersPy._injectors import _implemented_injectors 
 
 DATASETS_PATH = "analysis/datasets/"
-FILTERS = ["TomekLinks", "CNN", "DROP", "ENN", "AENN"]
+FILTERS = ["HARF", "TomekLinks", "CNN", "DROP", "ENN", "AENN"]
 
 datasets = [f for f in listdir(DATASETS_PATH)
                 if ( isfile(join(DATASETS_PATH, f)) and
@@ -40,8 +40,6 @@ def calculate_filter_f1(dataset, filter, injector, rate = 0.1):
             remainder = "passthrough"
             )
         attrs = ct.fit_transform(attrs)
-
-    attrs = attrs.values
 
     injector = injector(attrs, target, rate)
     injector.generate()
