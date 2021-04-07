@@ -5,7 +5,7 @@ from functools import partial
 import numpy as np
 import pandas as pd
 from scipy.io import arff as arff_io
-from sklearn import preprocessing, metrics
+from sklearn import preprocessing, metrics, compose
 
 
 from NoiseFiltersPy._filters import _implemented_filters
@@ -33,10 +33,15 @@ def calculate_filter_f1(dataset, filter, injector, rate = 0.1):
     if target.dtype == object:
         le.fit(target)
         target = le.transform(target)
-    attrs = data.drop("class", axis = 1).values
-    if not np.issubdtype(attrs.dtype, np.number):
-        enc.fit(attrs)
-        attrs = enc.transform(attrs).toarray()
+    attrs = data.drop("class", axis = 1)
+    if np.any(attrs.dtypes == object):
+        ct = compose.ColumnTransformer(
+            transformers = [("encoder", enc, attrs.dtypes == object)],
+            remainder = "passthrough"
+            )
+        attrs = ct.fit_transform(attrs)
+
+    attrs = attrs.values
 
     injector = injector(attrs, target, rate)
     injector.generate()
